@@ -1,0 +1,11 @@
+<svg width="400" height="200" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="400" height="200" fill="#E3F2FD"/>
+  
+  <!-- Image frame -->
+  <rect x="20" y="20" width="360" height="160" fill="#BBDEFB" stroke="#2196F3" stroke-width="2"/>
+  
+  <!-- Placeholder text -->
+  <text x="200" y="100" text-anchor="middle" font-size="24" fill="#2196F3" font-family="Arial">News Image</text>
+  <text x="200" y="130" text-anchor="middle" font-size="16" fill="#1976D2" font-family="Arial">Add your article image</text>
+</svg>

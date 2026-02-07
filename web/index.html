@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+    <meta name="description" content="A modern Flutter news application.">
+
+    <!-- iOS meta tags & icons -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="newswatch">
+    <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <title>NewsWatch</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" type="text/css" href="splash/style.css">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    <meta name="theme-color" content="#2196F3">
+    <meta name="msapplication-TileColor" content="#2196F3">
+</head>
+<body>
+    <!-- This script installs service_worker.js to provide PWA functionality to
+         application. For more information, see:
+         https://developers.google.com/web/fundamentals/primers/service-workers -->
+    <script>
+        var scriptLoaded = false;
+        function loadMainDartJs() {
+          if (scriptLoaded) {
+            return;
+          }
+          scriptLoaded = true;
+          var scriptTag = document.createElement('script');
+          scriptTag.src = 'main.dart.js';
+          scriptTag.type = 'application/javascript';
+          document.body.append(scriptTag);
+        }
+
+        if ('serviceWorker' in navigator) {
+          // Service workers are supported. Use them.
+          window.addEventListener('load', function () {
+            // Wait for registration to finish before dropping the <script> tag.
+            // Otherwise, the browser will load the script multiple times,
+            // potentially different versions.
+            var serviceWorkerUrl = 'flutter_service_worker.js';
+            navigator.serviceWorker.register(serviceWorkerUrl).then(function (reg) {
+              function findActivating() {
+                var sw = reg.installing || reg.waiting || reg.active;
+                sw.addEventListener('statechange', function () {
+                  findActivating();
+                });
+                if (sw && sw.state == 'activated') {
+                  console.log('Installed new service worker.');
+                  loadMainDartJs();
+                }
+              }
+              findActivating();
+            });
+          });
+        } else {
+          // Service workers not supported. Just drop the <script> tag.
+          loadMainDartJs();
+        }
+    </script>
+</body>
+</html>
